@@ -4,10 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Tasks } from './Tasks';
-import Calendar from './Calendar';
-import Analytics from './Analytics';
-import Kanban from './Kanban';
+import { Tasks } from './TaskDashboard Components/Tasks';
+import Calendar from './Calendar Components/Calendar';
+import Analytics from './Analytics Components/Analytics';
+import Kanban from './Kanban Components/Kanban';
 
 const router = createBrowserRouter([
   {
