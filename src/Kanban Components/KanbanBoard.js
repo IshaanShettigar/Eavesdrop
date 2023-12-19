@@ -62,7 +62,7 @@ export default function KanbanBoard() {
                 "userId": 3,
                 "id": 8,
                 "title": "Define success criteria: Determine how you will measure the project's success and what the deliverables should look like",
-                "completed": false,
+                "completed": true,
                 "reviewed": true
             },
             {
@@ -146,13 +146,14 @@ export default function KanbanBoard() {
                 "userId": 5,
                 "id": 20,
                 "title": "Project closure: Officially close the project, hand over deliverables, and evaluate the project's performance.",
-                "completed": false,
+                "completed": true,
                 "reviewed": true
             }
         ]
-        setCompleted(json.filter((task) => task.completed));
-        setReviewed(json.filter((task) => task.reviewed));
-        setIncomplete(json.filter((task) => !task.completed));
+        // completed and not reviewed
+        setCompleted(json.filter((task) => task.completed && !task.reviewed));
+        setReviewed(json.filter((task) => task.reviewed && task.completed));
+        setIncomplete(json.filter((task) => !task.completed && !task.reviewed));
 
     }, []);
 
