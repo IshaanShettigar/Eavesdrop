@@ -25,12 +25,12 @@ export default function Task({ task, index }) {
     return (
         <Draggable draggableId={`${task.id}`} key={task.id} index={index}>
             {(provided, snapshot) => (
-                <div className="rounded-lg shadow-lg p-2 border-2 border-white text-black mx-3 my-4 flex justify-between 
+                <div className="rounded-lg shadow-lg p-2 border-2 border-white text-black mx-4 my-4 flex justify-between 
                 flex-col cursor-pointer bg-gray-50 hover:scale-105 hover:border-blue-500  transition-all duration-200"
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
-                    isDragging={snapshot.isDragging}
+                // isDragging={snapshot.isDragging}
                 >
                     <div className="flex justify-start p-1" >
                         <span>

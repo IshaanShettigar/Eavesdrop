@@ -14,21 +14,21 @@ export default function KanbanBoard() {
                 "id": 1,
                 "title": "Define project objectives and scope: Clearly outline what the project aims to achieve and what is included within its boundaries",
                 "completed": true,
-                "reviewed": true
+                "reviewed": false
             },
             {
                 "userId": 2,
                 "id": 2,
                 "title": "Create a project plan: Develop a detailed plan that outlines tasks, timelines, and resource requirements",
                 "completed": true,
-                "reviewed": true
+                "reviewed": false
             },
             {
                 "userId": 3,
                 "id": 3,
                 "title": "Identify stakeholders: List all individuals or groups with an interest in the project's outcome and establish communication channels with them.",
                 "completed": true,
-                "reviewed": true
+                "reviewed": false
             },
             {
                 "userId": 4,
@@ -62,8 +62,8 @@ export default function KanbanBoard() {
                 "userId": 3,
                 "id": 8,
                 "title": "Define success criteria: Determine how you will measure the project's success and what the deliverables should look like",
-                "completed": true,
-                "reviewed": false
+                "completed": false,
+                "reviewed": true
             },
             {
                 "userId": 4,
@@ -147,7 +147,7 @@ export default function KanbanBoard() {
                 "id": 20,
                 "title": "Project closure: Officially close the project, hand over deliverables, and evaluate the project's performance.",
                 "completed": false,
-                "reviewed": false
+                "reviewed": true
             }
         ]
         setCompleted(json.filter((task) => task.completed));

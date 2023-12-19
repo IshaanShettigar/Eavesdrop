@@ -17,7 +17,7 @@ export default function Column({ title, tasks, id }) {
                     <div className="flex-grow p-1 transition-colors duration-200 ease-linear "
                         ref={provided.innerRef}
                         {...provided.droppableProps}
-                        isDraggingOver={snapshot.isDraggingOver}
+                    // isDraggingOver={snapshot.isDraggingOver}
                     >
                         {tasks.map((task, index) => (
                             <Task key={index} index={index} task={task} />
