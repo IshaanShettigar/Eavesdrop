@@ -44,7 +44,7 @@ export default function Task({ task, index }) {
                         <div>{task.title}</div>
                     </div>
                     <div className="flex justify-end p-1">
-                        <div className="p-2 text-blue-500 bg-white shadow-lg">
+                        <div className="p-2 text-blue-500 bg-white shadow-lg rounded-2xl">
                             <BsFillPersonFill
                                 onClick={() => console.log(task)}
                             />

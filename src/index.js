@@ -7,8 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Tasks } from './TaskDashboard Components/Tasks';
 import Calendar from './Calendar Components/Calendar';
 import Analytics from './Analytics Components/Analytics';
-import Kanban from './Kanban Components/Kanban';
-import KanbanBoard from './Kanban Components/SkKanban';
+import KanbanBoard from './Kanban Components/KanbanBoard';
 
 const router = createBrowserRouter([
   {
