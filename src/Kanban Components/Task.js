@@ -21,12 +21,13 @@ function bgcolorChange(props) {
                 : "#EAF4FC";
 }
 
-export default function Task({ task, index }) {
+export default function Task({ task, index, title }) {
     return (
         <Draggable draggableId={`${task.id}`} key={task.id} index={index}>
             {(provided, snapshot) => (
-                <div className="rounded-lg shadow-lg p-2 border-2 border-white text-black mx-4 my-4 flex justify-between 
-                flex-col cursor-pointer bg-gray-50 hover:scale-105 hover:border-blue-500  transition-all duration-200"
+                <div className={`rounded-lg shadow-lg p-2 border-2 border-white text-black mx-4 my-4 flex justify-between 
+                flex-col cursor-pointer bg-gray-50 hover:scale-105 transition-all duration-200
+                hover:${title === "To Do" ? "border-red-300" : title === "Done" ? "border-green-300" : title === "Reviewed" ? "border-yellow-300" : "border-blue-300"}`}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
@@ -44,7 +45,7 @@ export default function Task({ task, index }) {
                         <div>{task.title}</div>
                     </div>
                     <div className="flex justify-end p-1">
-                        <div className="p-2 text-blue-500 bg-white shadow-lg rounded-2xl">
+                        <div className="p-2 text-blue-500 bg-white shadow-sm shadow-blue-300 rounded-2xl">
                             <BsFillPersonFill
                                 onClick={() => console.log(task)}
                             />
