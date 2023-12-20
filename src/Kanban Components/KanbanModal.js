@@ -10,7 +10,6 @@ const KanbanModal = ({ open = true, onClose }) => {
 
     const { modalState, setModalState } = useContext(kanbanModalContext);
 
-
     return (
         // backdrop
         <div
@@ -59,12 +58,6 @@ const KanbanModal = ({ open = true, onClose }) => {
                     <label className="font-bold text-lg">Deadline:  </label>
                     <span>{modalState["taskDeadline"].toLocaleDateString()}</span>
                 </div>
-
-
-
-
-
-
             </div>
         </div>
     )
