@@ -1,10 +1,11 @@
-import React, { Fragment, createContext, useState, useEffect } from "react";
+import React, { Fragment, createContext, useState, useEffect, useContext } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { TaskModal } from "./TaskModal";
 
 const taskContext = createContext(null)
 
 const Tasks = () => {
+
     const [tasks, setTasks] = useState([
         {
             "taskName": "Create another sheet that has cost summaries for all components/connectors",
@@ -30,7 +31,55 @@ const Tasks = () => {
             "taskID": "3",
             "taskDeadline": new Date(),
             "taskApproved": "yes"
+        },
+        {
+            "taskName": "When refreshing the page or opening a diagram that you just saved, the linsk dont show up cause of some error",
+            "taskDescription": "When refreshing the page or saving and loading a diagram, the link color disappears. This is cause something weird happens when it saves it, I do not know what. Look at localstorage under the links attrs. Something weird is happeniing",
+            "taskPriority": "Low",
+            "taskID": "4",
+            "taskDeadline": new Date(),
+            "taskApproved": "no"
+        },
+        {
+            "taskName": "New Feature: When the user drags an element out of bounds then translate the paper in that direction",
+            "taskDescription": "This feature is needed to navigate complex diagrams.",
+            "taskPriority": "Medium",
+            "taskID": "5",
+            "taskDeadline": new Date(),
+            "taskApproved": "no"
+        },
+        {
+            "taskName": "Use browser local storage to store the current sessions state ",
+            "taskDescription": "This is a required feature as the user should not have the inconvenience of redrawing the diagrams if they accidentally close the tab.\nPossible ways to save the diagram: \n Ctrl + S triggers the saving\nSave every 5 minutes/1 minutes/30 seconds.\nSave once every graph.on('change', function)  event\nWe will be utilizing browser local storage",
+            "taskPriority": "High",
+            "taskID": "6",
+            "taskDeadline": new Date(),
+            "taskApproved": "no"
+        },
+        {
+            "taskName": "Platform element doesnt scale properly. I messed up the calc expressions somewhere",
+            "taskDescription": ".",
+            "taskPriority": "Low",
+            "taskID": "7",
+            "taskDeadline": new Date(),
+            "taskApproved": "no"
+        },
+        {
+            "taskName": "When refreshing the page or opening a diagram that you just saved, the linsk dont show up cause of some error",
+            "taskDescription": "When refreshing the page or saving and loading a diagram, the link color disappears.This is cause something weird happens when it saves it, I do not know what.Look at localstorage under the links attrs.Something weird is happeniing",
+            "taskPriority": "Low",
+            "taskID": "8",
+            "taskDeadline": new Date(),
+            "taskApproved": "no"
+        },
+        {
 
+            "taskName": "Integrate the new parameters into the application.",
+            "taskDescription": "Make sure to dynamically assign the necessary parameters every time the application is loaded up.",
+            "taskPriority": "High",
+            "taskID": "9",
+            "taskDeadline": new Date(),
+            "taskApproved": "no"
         }])
 
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -74,9 +123,13 @@ const Tasks = () => {
             <Fragment>
                 <div className="grid grid-cols-3 gap-6 ml-24 mr-8 my-8 ">
                     {/* Once we implement a fetch api then based on that we need to dynamically create a div and make sure only 3 Task's per line*/}
-                    <TaskCard task={tasks[0]} approved={tasks[0].taskApproved} onClick={onCardClick} />
+                    {tasks.map((task) => {
+                        return <TaskCard task={task} approved={task.taskApproved} onClick={onCardClick} />
+                    })}
+                    {/* <TaskCard task={tasks[0]} approved={tasks[0].taskApproved} onClick={onCardClick} />
                     <TaskCard task={tasks[1]} approved={tasks[1].taskApproved} onClick={onCardClick} />
-                    <TaskCard task={tasks[2]} approved={tasks[2].taskApproved} onClick={onCardClick} />
+                    <TaskCard task={tasks[2]} approved={tasks[2].taskApproved} onClick={onCardClick} /> */}
+
                 </div>
                 <TaskModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
