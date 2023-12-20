@@ -8,13 +8,18 @@ const taskContext = createContext(null)
 const Tasks = () => {
     const [tasks, setTasks] = useState([])
     const [spin, setSpin] = useState(true)
+
     useEffect(() => {
         const url = "http://localhost:5000/api/tasks/all"
         const fetchTaskData = async () => {
             try {
                 const response = await fetch(url);
-                const json = await response.json();
+                let json = await response.json();
                 setSpin(false)
+                json.data = json.data.map((task) => {
+                    task.taskDeadline = new Date(task.taskDeadline.split('T')[0])
+                    return task;
+                })
                 setTasks(json.data);
             } catch (error) {
                 console.log("error", error);
@@ -22,7 +27,6 @@ const Tasks = () => {
         };
 
         fetchTaskData();
-
     }, []);
 
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -65,16 +69,13 @@ const Tasks = () => {
         <taskContext.Provider value={{ modalState, setModalState }}>
             <Fragment>
                 <div className="grid grid-cols-3 gap-6 ml-24 mr-8 my-8 ">
-                    {/* Once we implement a fetch api then based on that we need to dynamically create a div and make sure only 3 Task's per line*/}
                     {tasks.map((task) => {
                         return <TaskCard key={task.taskID} task={task} approved={task.taskApproved} onClick={onCardClick} />
                     })}
-                    {/* <TaskCard task={tasks[0]} approved={tasks[0].taskApproved} onClick={onCardClick} />
-                    <TaskCard task={tasks[1]} approved={tasks[1].taskApproved} onClick={onCardClick} />
-                    <TaskCard task={tasks[2]} approved={tasks[2].taskApproved} onClick={onCardClick} /> */}
-
                 </div>
+
                 <TaskModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
                 <div className={`fixed top-[45vh] left-[50vw] text-blue-600 animate-spin ${spin ? "opacity-100" : "opacity-0"}`}>
                     <ImSpinner6 size={100} />
                 </div>

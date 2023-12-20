@@ -14,8 +14,21 @@ const TaskModal = ({ open = false, onClose }) => {
 
     const disabledButton = "opacity-50 cursor-not-allowed";
 
+    const url = "http://localhost:5000/api/tasks/"
     const onClickReject = () => {
         if (modalState["taskApproved"] === "not-yet") {
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({
+                    "action": "reject"
+                }),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                }
+            }
+
+            fetch(url + `${modalState["taskID"]}`, options).then((response) => { return response.json() }).then((data) => console.log(data.msg))
+
             onClose()
             setModalState({ ...modalState, "taskApproved": "no" })
         }
@@ -23,6 +36,19 @@ const TaskModal = ({ open = false, onClose }) => {
 
     const onClickApprove = () => {
         if (modalState["taskApproved"] === "not-yet" || modalState["taskApproved"] === "no") {
+
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({
+                    "action": "approve"
+                }),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                }
+            }
+
+            fetch(url + `${modalState["taskID"]}`, options).then((response) => { return response.json() }).then((data) => console.log(data.msg))
+
             onClose()
             setModalState({ ...modalState, "taskApproved": "yes" })
         }
