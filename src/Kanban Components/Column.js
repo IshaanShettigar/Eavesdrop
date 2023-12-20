@@ -4,7 +4,8 @@ import { StrictModeDroppable } from "./CustomDroppable";
 import { Droppable } from "react-beautiful-dnd";
 
 /* ISSUE 1: Add min height 100px to div inside with flex-grow */
-export default function Column({ title, tasks, id }) {
+export default function Column({ title, tasks, id, onClick }) {
+
     return (
         <div className="bg-slate-100 rounded-md w-[21rem] h-fit overflow-scroll top-0 border border-gray-400 
         no-scrollbar  max-h-[40em]">
@@ -20,7 +21,7 @@ export default function Column({ title, tasks, id }) {
                     // isDraggingOver={snapshot.isDraggingOver}
                     >
                         {tasks.map((task, index) => (
-                            <Task key={index} index={index} task={task} title={title} />
+                            <Task key={index} index={index} task={task} title={title} onClick={onClick} />
                         ))}
                         {provided.placeholder}
                     </div>

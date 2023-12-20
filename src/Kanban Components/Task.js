@@ -21,9 +21,9 @@ function bgcolorChange(props) {
                 : "#EAF4FC";
 }
 
-export default function Task({ task, index, title }) {
+export default function Task({ task, index, title, onClick }) {
     return (
-        <Draggable draggableId={`${task.id}`} key={task.id} index={index}>
+        <Draggable draggableId={`${task.taskID}`} key={task.taskID} index={index}>
             {(provided, snapshot) => (
                 <div className={`rounded-lg shadow-lg p-2 border-2 border-white text-black mx-4 my-4 flex justify-between 
                 flex-col cursor-pointer bg-gray-50 hover:scale-105 transition-all duration-200
@@ -31,18 +31,19 @@ export default function Task({ task, index, title }) {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
+                    onClick={() => onClick(task["taskID"], task["taskName"], task["taskDescription"], task["taskPriority"], task["taskDeadline"])}
                 // isDragging={snapshot.isDragging}
                 >
                     <div className="flex justify-start p-1" >
                         <span>
                             <small>
-                                #{task.id}
+                                #{task.taskID}
                                 {"  "}
                             </small>
                         </span>
                     </div>
                     <div className="flex justify-center p-1">
-                        <div>{task.title}</div>
+                        <div>{task.taskName}</div>
                     </div>
                     <div className="flex justify-end p-1">
                         <div className="p-2 text-blue-500 bg-white shadow-sm shadow-blue-300 rounded-2xl">
@@ -53,7 +54,8 @@ export default function Task({ task, index, title }) {
                     </div>
                     {provided.placeholder}
                 </div>
-            )}
-        </Draggable>
+            )
+            }
+        </Draggable >
     );
 }
