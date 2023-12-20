@@ -30,6 +30,11 @@ const handleTaskApproveReject = async (req, res) => {
     }
 }
 
+const handleKanbanDrop = async (req, res) => {
+    const { taskCompleted, taskReviewed } = req.body;
+    await Task.findOneAndUpdate({ taskID: req.params.taskID }, { taskCompleted: taskCompleted, taskReviewed: taskReviewed })
+    res.status(200).json({ msg: "Route working" })
+}
 
 
-module.exports = { getAllTasks, getKanbanTasks, handleTaskApproveReject }
+module.exports = { getAllTasks, getKanbanTasks, handleTaskApproveReject, handleKanbanDrop }

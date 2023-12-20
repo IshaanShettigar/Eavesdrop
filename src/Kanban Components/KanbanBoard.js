@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import Column from "./Column";
 import { KanbanModal } from "./KanbanModal";
+import { ImSpinner6 } from "react-icons/im";
 
 const kanbanModalContext = createContext(null)
 
@@ -10,6 +11,7 @@ export default function KanbanBoard() {
     const [incomplete, setIncomplete] = useState([]);
     const [reviewed, setReviewed] = useState([]);
 
+    const [spin, setSpin] = useState(true)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [modalState, setModalState] = useState({
         "taskID": "", "taskName": "", "taskDescription": "", "taskPriority": "", "taskDeadline": new Date()
@@ -26,7 +28,6 @@ export default function KanbanBoard() {
         setIsModalOpen(true)
     }
 
-    const [json, setJson] = useState([])
 
     useEffect(() => {
         // const json = [
@@ -77,7 +78,7 @@ export default function KanbanBoard() {
             try {
                 const response = await fetch(url);
                 const json = await response.json();
-                // setSpin(false)
+                setSpin(false)
                 // setJson(json.data);
                 // completed and not reviewed
                 setCompleted(json.data.filter((task) => task.taskCompleted && !task.taskReviewed));
@@ -109,8 +110,10 @@ export default function KanbanBoard() {
 
     const handleDragEnd = (result) => {
         const { destination, source, draggableId } = result;
-
+        const url = "http://localhost:5000/api/tasks/kanban/"
+        console.log(draggableId)
         if (source.droppableId == destination.droppableId) return;
+
 
         //REMOVE FROM SOURCE ARRAY
         if (source.droppableId == 4) {
@@ -128,10 +131,46 @@ export default function KanbanBoard() {
 
         //ADD ITEM
         if (destination.droppableId == 4) {
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({
+                    "taskCompleted": "true",
+                    "taskReviewed": "true"
+                }),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                }
+            }
+
+            fetch(url + draggableId, options).then((response) => response.json()).then((data) => { console.log(data.msg) })
             setReviewed([{ ...task, reviewed: !task.reviewed }, ...reviewed]);
         } else if (destination.droppableId == 2) {
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({
+                    "taskCompleted": "true",
+                    "taskReviewed": "false"
+                }),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                }
+            }
+
+            fetch(url + draggableId, options).then((response) => response.json()).then((data) => { console.log(data.msg) })
             setCompleted([{ ...task, completed: !task.completed }, ...completed]);
         } else {
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({
+                    "taskCompleted": "false",
+                    "taskReviewed": "false"
+                }),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                }
+            }
+
+            fetch(url + draggableId, options).then((response) => response.json()).then((data) => { console.log(data.msg) })
             setIncomplete([{ ...task, completed: !task.completed }, ...incomplete]);
         }
     };
@@ -161,7 +200,9 @@ export default function KanbanBoard() {
                     </div>
                 </DragDropContext>
                 <KanbanModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
-
+                <div className={`fixed top-[45vh] left-[50vw] text-blue-500 animate-spin ${spin ? "opacity-100" : "opacity-0"}`}>
+                    <ImSpinner6 size={100} />
+                </div>
             </div>
         </kanbanModalContext.Provider>
     );

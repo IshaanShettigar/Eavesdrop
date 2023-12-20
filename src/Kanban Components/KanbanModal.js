@@ -56,7 +56,7 @@ const KanbanModal = ({ open = true, onClose }) => {
 
                 <div className="flex items-center gap-6 mt-4">
                     <label className="font-bold text-lg">Deadline:  </label>
-                    <span>{modalState["taskDeadline"].toLocaleDateString()}</span>
+                    <span>{String(modalState["taskDeadline"]).split("T")[0] + " " + String(modalState["taskDeadline"]).split("T")[1]}</span>
                 </div>
             </div>
         </div>
