@@ -18,3 +18,13 @@
    ```
    npm run start
    ```
+
+4. For the Backend, run `cd backend` and then:
+   ```
+   npm install
+   ```
+
+5. Run 
+   ```   
+   npm run dev
+   ```
