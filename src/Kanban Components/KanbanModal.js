@@ -28,11 +28,11 @@ const KanbanModal = ({ open = true, onClose }) => {
 
                 <label className="font-bold text-lg block ">Task Name</label>
                 <input type="text" value={modalState["taskName"]} onChange={(e) => setModalState({ ...modalState, "taskName": e.target.value })}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 my-2" />
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 my-2" readOnly />
 
                 <label className="font-bold text-lg block mt-4">Task Description</label>
                 <textarea value={modalState["taskDescription"]} onChange={(e) => setModalState({ ...modalState, "taskDescription": e.target.value })}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 my-2" />
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 my-2" readOnly />
 
 
                 <div className="flex gap-4 items-center text-gray-800 text-sm mt-6">
@@ -46,12 +46,11 @@ const KanbanModal = ({ open = true, onClose }) => {
 
                 <div className="flex items-center gap-6 mt-4">
                     <label className="font-bold text-lg">Priority: </label>
-                    <select value={modalState["taskPriority"]} onChange={(e) => setModalState({ ...modalState, "taskPriority": e.target.value })}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 block w-52 p-2.5 my-2">
-                        <option value="High">High</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Low">Low</option>
-                    </select>
+                    <input value={modalState["taskPriority"]} onChange={(e) => setModalState({ ...modalState, "taskPriority": e.target.value })}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 block w-52 p-2.5 my-2"
+                        readOnly />
+
+
                 </div>
 
                 <div className="flex items-center gap-6 mt-4">
