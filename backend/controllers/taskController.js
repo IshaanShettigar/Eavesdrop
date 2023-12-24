@@ -25,6 +25,12 @@ const handleTaskApproveReject = async (req, res) => {
     }
 }
 
+const updateTask = async (req, res) => {
+    await Task.findOneAndUpdate({ taskID: req.params.taskID }, { ...req.body })
+    res.status(200).json({ msg: `Hit update task route taskID:${req.params.taskID}` })
+}
+
+
 const handleKanbanDrop = async (req, res) => {
     const { taskCompleted, taskReviewed } = req.body;
     await Task.findOneAndUpdate({ taskID: req.params.taskID }, { taskCompleted: taskCompleted, taskReviewed: taskReviewed })
@@ -50,4 +56,4 @@ const filterKanban = async (req, res) => {
     }
     res.status(200).json({ msg: "Hit filter kanban", data: kanbantasks })
 }
-module.exports = { getAllTasks, getKanbanTasks, handleTaskApproveReject, handleKanbanDrop, filterKanban }
+module.exports = { getAllTasks, getKanbanTasks, updateTask, handleTaskApproveReject, handleKanbanDrop, filterKanban }

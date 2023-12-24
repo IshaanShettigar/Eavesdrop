@@ -29,8 +29,8 @@ const TaskModal = ({ open = false, onClose }) => {
 
             fetch(url + `${modalState["taskID"]}`, options).then((response) => { return response.json() }).then((data) => console.log(data.msg))
 
-            onClose()
             setModalState({ ...modalState, "taskApproved": "no" })
+            onClose()
         }
     }
 
@@ -49,8 +49,8 @@ const TaskModal = ({ open = false, onClose }) => {
 
             fetch(url + `${modalState["taskID"]}`, options).then((response) => { return response.json() }).then((data) => console.log(data.msg))
 
-            onClose()
             setModalState({ ...modalState, "taskApproved": "yes" })
+            onClose()
         }
 
     }
@@ -106,7 +106,6 @@ const TaskModal = ({ open = false, onClose }) => {
                             customInput={<CustomInputDatePicker />} />
                     </label>
                 </div>
-
 
 
                 <div className="flex justify-around mt-10">

@@ -64,7 +64,21 @@ const Tasks = () => {
         });
     }, [modalState])
 
-
+    const onClosingTaskModal = () => {
+        const url = "http://localhost:5000/api/tasks/"
+        const options = {
+            method: 'PATCH',
+            body: JSON.stringify({
+                ...modalState
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            }
+        }
+        console.log(url + modalState["taskID"])
+        fetch(url + modalState["taskID"], options).then((response) => response.json()).then((data) => { console.log(data.msg) })
+        setIsModalOpen(false)
+    }
     return (
         <taskContext.Provider value={{ modalState, setModalState }}>
             <Fragment>
@@ -74,7 +88,7 @@ const Tasks = () => {
                     })}
                 </div>
 
-                <TaskModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
+                <TaskModal open={isModalOpen} onClose={onClosingTaskModal} />
 
                 <div className={`fixed top-[45vh] left-[50vw] text-blue-600 animate-spin ${spin ? "opacity-100" : "opacity-0"}`}>
                     <ImSpinner6 size={100} />
