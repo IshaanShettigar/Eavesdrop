@@ -3,6 +3,8 @@ import { DragDropContext } from "react-beautiful-dnd";
 import Column from "./Column";
 import { KanbanModal } from "./KanbanModal";
 import { ImSpinner6 } from "react-icons/im";
+import { FaSearch, FaMicrophone, FaFilter } from "react-icons/fa"
+
 
 const kanbanModalContext = createContext(null)
 
@@ -30,49 +32,6 @@ export default function KanbanBoard() {
 
 
     useEffect(() => {
-        // const json = [
-        //     {
-        //         "taskName": "Create another sheet that has cost summaries for all components/connectors",
-        //         "taskDescription": "In the last call the stakeholders stressed on the importance of having another sheet where the costs are displayed. ",
-        //         "taskPriority": "High",
-        //         "taskID": "1",
-        //         "taskDeadline": new Date(),
-        //         "taskApproved": "not-yet",
-        //         "taskCompleted": false,
-        //         "taskReviewed": false
-        //     },
-        //     {
-        //         "taskName": "[BUG] Sidebar tooltip is being displayed below (Z) tasks",
-        //         "taskDescription": "Tooltip in the sidebar is being displayed in the lower z-index. Correcting the z-index also doesn't fix this. Please look into this issue",
-        //         "taskPriority": "Medium",
-        //         "taskID": "2",
-        //         "taskDeadline": new Date(),
-        //         "taskApproved": "no",
-        //         "taskCompleted": false,
-        //         "taskReviewed": false
-        //     },
-        //     {
-        //         "taskName": "Fix the hover modal position when modal is out of bounds for PLET and UTH",
-        //         "taskDescription": "The hover modal is wildly out of position due to the fact that we are defining the distance of the modal from the hovered coordinates in terms of the elements height (in case of out of bounds on the Y axis) and width (in case of out of bounds on the X axis). This is an error simply due to the fact that these elements PLET and UTH have a much larger size. Not visually tho,\
-        //         the elements bounding box is itself larger than the others.\nPossible solutions:\nRedefine/Re-draw them.\nFigure out a different way to display the out of bounds cases.",
-        //         "taskPriority": "Low",
-        //         "taskID": "3",
-        //         "taskDeadline": new Date(),
-        //         "taskApproved": "yes",
-        //         "taskCompleted": false,
-        //         "taskReviewed": false
-        //     },
-        //     {
-        //         "taskName": "When refreshing the page or opening a diagram that you just saved, the linsk dont show up cause of some error",
-        //         "taskDescription": "When refreshing the page or saving and loading a diagram, the link color disappears. This is cause something weird happens when it saves it, I do not know what. Look at localstorage under the links attrs. Something weird is happeniing",
-        //         "taskPriority": "Low",
-        //         "taskID": "4",
-        //         "taskDeadline": new Date(),
-        //         "taskApproved": "no",
-        //         "taskCompleted": false,
-        //         "taskReviewed": false
-        //     }
-        // ]
         const url = "http://localhost:5000/api/tasks/kanban"
         const fetchTaskData = async () => {
             try {
@@ -185,27 +144,100 @@ export default function KanbanBoard() {
 
     return (
         <kanbanModalContext.Provider value={{ modalState, setModalState }}>
-            <div className="flex flex-col items-center justify-center mt-5">
-                {/* <div className="mx-auto"> */}
-                <h2 className="font-semibold  text-4xl text-blue-500 " >Kanban Board</h2>
-                {/* </div> */}
+            <div>
+                <h2 className="font-semibold  text-4xl text-blue-500 text-center my-5" >Kanban Board</h2>
+                <div className="flex justify-between ml-24 mr-10">
+                    <SearchBar />
+                    <FilterBy setCompleted={setCompleted} setReviewed={setReviewed} setIncomplete={setIncomplete} setSpin={setSpin} />
+                </div>
+                <div className="flex flex-col items-center justify-center ">
+                    {/* <div className="mx-auto"> */}
 
-                <DragDropContext onDragEnd={handleDragEnd}>
+                    {/* </div> */}
 
-                    <div className="grid grid-cols-4 gap-6 ml-24 mr-8 my-8">
-                        <Column title={"To Do"} tasks={incomplete} id={"1"} onClick={onCardClick} />
-                        <Column title={"Done"} tasks={completed} id={"2"} onClick={onCardClick} />
-                        <Column title={"Backlog"} tasks={[]} id={"3"} onClick={onCardClick} />
-                        <Column title={"Reviewed"} tasks={reviewed} id={"4"} onClick={onCardClick} />
+                    <DragDropContext onDragEnd={handleDragEnd}>
+                        <div className="grid grid-cols-4 gap-6 ml-24 mr-8 my-4">
+                            <Column title={"To Do"} tasks={incomplete} id={"1"} onClick={onCardClick} />
+                            <Column title={"Done"} tasks={completed} id={"2"} onClick={onCardClick} />
+                            <Column title={"Backlog"} tasks={[]} id={"3"} onClick={onCardClick} />
+                            <Column title={"Reviewed"} tasks={reviewed} id={"4"} onClick={onCardClick} />
+                        </div>
+                    </DragDropContext>
+                    <KanbanModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
+                    <div className={`fixed top-[45vh] left-[50vw] text-blue-500 animate-spin ${spin ? "opacity-100" : "opacity-0"}`}>
+                        <ImSpinner6 size={100} />
                     </div>
-                </DragDropContext>
-                <KanbanModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
-                <div className={`fixed top-[45vh] left-[50vw] text-blue-500 animate-spin ${spin ? "opacity-100" : "opacity-0"}`}>
-                    <ImSpinner6 size={100} />
                 </div>
             </div>
         </kanbanModalContext.Provider>
     );
+}
+
+const SearchBar = () => {
+    const [query, setQuery] = useState("")
+    return (
+        <div className="relative">
+            <div className="text-gray-400 absolute top-[0.92rem] left-3 hover:cursor-pointer hover:text-blue-400">
+                <FaSearch size={20} />
+            </div>
+            <input type="text" placeholder="Enter a query" value={query} onChange={(e) => setQuery(e.target.value)}
+                className="bg-white h-12 w-full px-12 rounded-lg focus:outline-blue-400 hover:cursor-pointer outline-gray-200 outline-2 outline" />
+            <span className="absolute top-4 right-5 border-l pl-4 text-gray-400 hover:text-blue-400 hover:cursor-pointer">
+                <FaMicrophone size={20} />
+            </span>
+        </div>
+    )
+}
+
+const FilterBy = ({ setCompleted, setIncomplete, setReviewed, setSpin }) => {
+    const [filter, setFilter] = useState("")
+    // fetch with options set to priority: filter
+    useEffect(() => {
+        setSpin(true)
+        const url = "http://localhost:5000/api/tasks/kanban"
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({
+                "priority": filter
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            }
+        }
+        console.log(options.body);
+        const fetchTaskData = async () => {
+            try {
+                const response = await fetch(url, options);
+                const json = await response.json();
+                setSpin(false)
+                setCompleted(json.data.filter((task) => task.taskCompleted && !task.taskReviewed));
+                setReviewed(json.data.filter((task) => task.taskReviewed && task.taskCompleted));
+                setIncomplete(json.data.filter((task) => !task.taskCompleted && !task.taskReviewed));
+            } catch (error) {
+                console.log("error", error);
+            }
+        };
+
+        fetchTaskData()
+
+    }, [filter])
+    return (
+        <div className=" relative">
+            <div className="text-gray-400 absolute top-3 left-4 border-r">
+                <div className="flex gap-2 items-center">
+                    <FaFilter size={20} />
+                    <span className="w-full ">Filter</span>
+                </div>
+            </div>
+            <select value={filter} onChange={(e) => setFilter(e.target.value)}
+                className="pl-20 h-12 p-2 rounded-lg focus:outline-blue-400 hover:cursor-pointer outline-gray-200 outline-2 outline">
+                <option>None</option>
+                <option value="High">Priority - High</option>
+                <option value="Medium">Priority - Medium</option>
+                <option value="Low">Priority - Low</option>
+            </select>
+        </div>
+    )
 }
 
 export { kanbanModalContext }

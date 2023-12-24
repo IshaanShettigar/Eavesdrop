@@ -1,5 +1,6 @@
 import { FaTasks, FaCalendar } from "react-icons/fa";
 import { IoAnalytics } from "react-icons/io5";
+import { HiUsers } from "react-icons/hi";
 import { MdOutlineViewKanban } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import React from "react";
@@ -21,6 +22,7 @@ const SideBar = () => {
             <SideBarIcon icon={<IoAnalytics size={28} />} onClick={() => handleIconClick("analytics", "analytics")} isActive={activeIcon === "analytics"} text="Analytics" />
             <SideBarIcon icon={<FaCalendar size={23} />} onClick={() => handleIconClick("calendar", "calendar")} isActive={activeIcon === "calendar"} text="Calendar" />
             <SideBarIcon icon={<MdOutlineViewKanban size={28} />} onClick={() => handleIconClick("kanban", "kanban")} isActive={activeIcon === "kanban"} text="Kanban" />
+            <SideBarIcon icon={<HiUsers size={28} />} onClick={() => handleIconClick("employees", "employees")} isActive={activeIcon === "employees"} text="Manage Employees" />
         </div>
     )
 }

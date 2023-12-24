@@ -6,6 +6,7 @@ const mongoose = require("mongoose")
 const helmet = require('helmet')
 const cors = require('cors')
 const { taskRouter } = require('./routes/taskRouter')
+const { employeeRouter } = require('./routes/employeeRouter')
 const notFound = require('./middleware/notFound')
 
 const app = express()
@@ -16,7 +17,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use('/api/tasks', taskRouter)
-
+app.use('/api/employee', employeeRouter)
 
 app.use(notFound)
 PORT = process.env.PORT || 5000

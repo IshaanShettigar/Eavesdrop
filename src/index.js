@@ -5,6 +5,7 @@ import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Tasks } from './TaskDashboard Components/Tasks';
+import { Employee } from './Employee Components/Employee';
 import Calendar from './Calendar Components/Calendar';
 import Analytics from './Analytics Components/Analytics';
 import KanbanBoard from './Kanban Components/KanbanBoard';
@@ -29,7 +30,11 @@ const router = createBrowserRouter([
       {
         path: 'kanban',
         element: <KanbanBoard />
-      }
+      },
+      {
+        path: 'employees',
+        element: <Employee />
+      },
     ]
   },
 

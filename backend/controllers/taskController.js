@@ -5,11 +5,6 @@ const getAllTasks = async (req, res) => {
     res.status(200).json({ msg: "Get All Tasks Route Hit Successfully", data: tasks })
 }
 
-const getKanbanTasks = async (req, res) => {
-    const kanbantasks = await Task.find({ taskApproved: "yes" })
-    res.status(200).json({ msg: "Get Kanban Tasks Route Hit Successfully", data: kanbantasks })
-}
-
 const handleTaskApproveReject = async (req, res) => {
     const { action } = req.body;
     if (action === "approve") {
@@ -36,5 +31,23 @@ const handleKanbanDrop = async (req, res) => {
     res.status(200).json({ msg: "Route working" })
 }
 
+const getKanbanTasks = async (req, res) => {
+    const kanbantasks = await Task.find({ taskApproved: "yes" })
+    res.status(200).json({ msg: "Get Kanban Tasks Route Hit Successfully", data: kanbantasks })
+}
 
-module.exports = { getAllTasks, getKanbanTasks, handleTaskApproveReject, handleKanbanDrop }
+const filterKanban = async (req, res) => {
+    const { priority, deadline } = req.body;
+    let kanbantasks = null;
+    if (priority && priority !== "None") {
+        kanbantasks = await Task.find({ taskPriority: priority, taskApproved: "yes" })
+    }
+    else if (deadline) {
+        console.log(deadline);
+    }
+    else {
+        kanbantasks = await Task.find({ taskApproved: "yes" })
+    }
+    res.status(200).json({ msg: "Hit filter kanban", data: kanbantasks })
+}
+module.exports = { getAllTasks, getKanbanTasks, handleTaskApproveReject, handleKanbanDrop, filterKanban }
