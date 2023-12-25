@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ImSpinner8 } from "react-icons/im";
+import calendarData from './calendar.json';
 
 
 const Calendar = () => {
 
-
+    const [calendar, setCalendar] = useState([]);
     const [tasks, setTasks] = useState([])
     const [spin, setSpin] = useState(true);
 
@@ -30,17 +31,43 @@ const Calendar = () => {
         }
         fetchTaskData()
 
+        setCalendar(calendarData)
 
-        /* Temporarily restricting it to December Month only, therefore the state depends only on the data and not month     */
     }, [])
 
 
+    const gotoNextMonth = () => {
+        let flag = false
+        let newCalendar = []
+        calendar.forEach((data) => {
+            if (data.active) {
+                flag = true;
+                newCalendar.push({ ...data, "active": false })
+            }
+            else if (flag) {
+                flag = false;
+                newCalendar.push({ ...data, "active": true })
+            }
+            else {
+                newCalendar.push({ ...data })
+            }
+        })
+        setCalendar(newCalendar)
+    }
     return (
         <div className="mx-auto mt-10">
             <div className="wrapper bg-white rounded shadow w-full ">
                 <div className="header flex justify-between border-b p-2">
                     <span className="text-lg font-bold">
-                        2023 December
+                        {/* Code to display the year followed by month */}
+                        {calendar.map((data) => {
+                            if (data.active) {
+                                return (`${data.year} ${data.month}`)
+                            }
+                            else {
+                                return ''
+                            }
+                        })}
                     </span>
                     <div className="buttons">
                         <button className="p-1">
@@ -50,7 +77,7 @@ const Calendar = () => {
                                 <path fillRule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z" />
                             </svg>
                         </button>
-                        <button className="p-1">
+                        <button className="p-1" onClick={gotoNextMonth}>
                             <svg width="1em" fill="gray" height="1em" viewBox="0 0 16 16" className="bi bi-arrow-right-circle" xmlns="http://www.w3.org/2000/svg">
                                 <path fillRule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                                 <path fillRule="evenodd" d="M7.646 11.354a.5.5 0 0 1 0-.708L10.293 8 7.646 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z" />
@@ -73,100 +100,71 @@ const Calendar = () => {
                     </thead>
                     <tbody>
                         <tr className="text-center h-20">
-                            <DayCard dayNumber={1} tasks={tasks}>
-                                {/* This will be the rendered children children[0] children[1] */}
-                                <Event displayText="#1 Kelsa" />
-                                <Event displayText="#4 CR7 is best" />
-                                <Event displayText="#4 CR7 is best" />
-                                <Event displayText="#4 CR7 is best" />
+                            {calendar.map((data) => {
+                                if (data.active) {
+                                    return data.days.slice(0, 7).map((day) => {
 
-                            </DayCard>
-                            <DayCard dayNumber={2} tasks={tasks}>
-                                {/* <Event displayText="#6 Jon Bones Jones" color="bg-rose-500/[.50]" /> */}
-                                <Event displayText="#4 CR7 is best" />
-                            </DayCard>
-                            <DayCard dayNumber={3} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={4} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={5} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={6} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={7} tasks={tasks}>
-                            </DayCard>
+                                        return (
+                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} />
+                                        )
+                                    })
+                                }
+                            })}
                         </tr>
 
                         <tr className="text-center h-20">
-                            <DayCard dayNumber={8} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={9} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={10} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={11} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={12} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={13} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={14} tasks={tasks}>
-                            </DayCard>
+                            {calendar.map((data) => {
+                                if (data.active) {
+                                    return data.days.slice(7, 14).map((day) => {
+
+                                        return (
+                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} />
+                                        )
+                                    })
+                                }
+                            })}
                         </tr>
 
 
                         <tr className="text-center h-20">
-                            <DayCard dayNumber={15} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={16} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={17} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={18} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={19} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={20} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={21} tasks={tasks}>
-                            </DayCard>
+                            {calendar.map((data) => {
+                                if (data.active) {
+                                    return data.days.slice(14, 21).map((day) => {
 
+                                        return (
+                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} />
+                                        )
+                                    })
+                                }
+                            })}
                         </tr>
 
 
                         <tr className="text-center h-20">
-                            <DayCard dayNumber={22} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={23} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={24} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={25} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={26} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={27} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={28} tasks={tasks}>
-                            </DayCard>
+                            {calendar.map((data) => {
+                                if (data.active) {
+                                    return data.days.slice(21, 28).map((day) => {
+
+                                        return (
+                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} />
+                                        )
+                                    })
+                                }
+                            })}
                         </tr>
 
 
                         <tr className="text-center h-20">
-                            <DayCard dayNumber={29} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={30} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={31} tasks={tasks}>
-                            </DayCard>
-                            <DayCard dayNumber={1} isDisabled tasks={[]}>
-                            </DayCard>
-                            <DayCard dayNumber={2} isDisabled tasks={[]}>
-                            </DayCard>
-                            <DayCard dayNumber={3} isDisabled tasks={[]}>
-                            </DayCard>
-                            <DayCard dayNumber={4} isDisabled tasks={[]}>
-                            </DayCard>
+                            {calendar.map((data) => {
+                                if (data.active) {
+                                    return data.days.slice(28, 35).map((day) => {
+
+                                        return (
+                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} />
+                                        )
+                                    })
+                                }
+                            })}
                         </tr>
                     </tbody>
                 </table>
@@ -194,7 +192,7 @@ const Event = ({ displayText, bgColor = "bg-purple-600", textColor = "text-purpl
     )
 }
 
-const DayCard = ({ dayNumber, children, isDisabled = false, className = "", tasks }) => {
+const DayCard = ({ dayNumber, month, year, isDisabled = false, className = "", tasks }) => {
     const eventcolors = {
         "1": {
             "bgColor": "bg-purple-600",
@@ -244,18 +242,19 @@ const DayCard = ({ dayNumber, children, isDisabled = false, className = "", task
                 <div className="flex-grow h-30 py-1 w-full "> {/* Removed grid grid-cols-1 grid-rows-5 gap-0 */}
                     {
                         tasks.map((task, index) => {
-
-                            if (dayNumber <= task.taskDeadline.getDate() && dayNumber >= task.taskStartTime.getDate()) {
-                                console.log()
+                            const curDate = new Date(`${month} ${dayNumber}, ${year}`)
+                            const startMonth = task.taskStartTime.toLocaleString('default', { month: 'long' })
+                            const endMonth = task.taskDeadline.toLocaleString('default', { month: 'long' })
+                            // Not working
+                            {/* if (dayNumber <= task.taskDeadline.getDate() && dayNumber >= task.taskStartTime.getDate() && isDisabled === false && (month === startMonth || month === endMonth)) { */ }
+                            if (curDate < task.taskDeadline && curDate > task.taskStartTime && isDisabled === false && (month === startMonth || month === endMonth)) {
 
                                 return (
                                     <div key={index}>
                                         <Event displayText={`${task.taskID} ${task.taskName.slice(0, 10)}...`} bgColor={`${eventcolors[task.taskID]['bgColor']}`} textColor={`${eventcolors[task.taskID]['textColor']}`} />
                                     </div>)
                             }
-                            else {
 
-                            }
                         })
                     }
                 </div>
