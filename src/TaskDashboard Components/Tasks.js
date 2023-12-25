@@ -2,6 +2,7 @@ import React, { Fragment, createContext, useState, useEffect, useContext } from 
 import { BsFillPersonFill, } from "react-icons/bs";
 import { ImSpinner6 } from "react-icons/im";
 import { TaskModal } from "./TaskModal";
+import { Tab, Tabs } from "./Tabs";
 
 const taskContext = createContext(null)
 
@@ -75,25 +76,62 @@ const Tasks = () => {
                 'Content-type': 'application/json; charset=UTF-8',
             }
         }
-        console.log(url + modalState["taskID"])
+        console.log("Modal State in onClosingTaskModal", modalState)
         fetch(url + modalState["taskID"], options).then((response) => response.json()).then((data) => { console.log(data.msg) })
         setIsModalOpen(false)
     }
+
+
     return (
         <taskContext.Provider value={{ modalState, setModalState }}>
-            <Fragment>
-                <div className="grid grid-cols-3 gap-6 ml-24 mr-8 my-8 ">
-                    {tasks.map((task) => {
-                        return <TaskCard key={task.taskID} task={task} approved={task.taskApproved} onClick={onCardClick} />
-                    })}
-                </div>
 
-                <TaskModal open={isModalOpen} onClose={onClosingTaskModal} />
+            <Tabs>
+                <Tab label={"Approved"}>
+                    <div className="grid grid-cols-3 gap-6 ml-24 mr-8 my-8 ">
+                        {tasks.map((task) => {
+                            if (task.taskApproved === "yes") {
+                                return <TaskCard key={task.taskID} task={task} approved={task.taskApproved} onClick={onCardClick} />
+                            }
+                        })}
+                    </div>
 
-                <div className={`fixed top-[45vh] left-[50vw] text-blue-600 animate-spin ${spin ? "opacity-100" : "opacity-0"}`}>
-                    <ImSpinner6 size={100} />
-                </div>
-            </Fragment>
+                    <TaskModal open={isModalOpen} onClose={onClosingTaskModal} />
+
+                    <div className={`fixed top-[45vh] left-[50vw] text-blue-600 animate-spin ${spin ? "opacity-100" : "opacity-0"}`}>
+                        <ImSpinner6 size={100} />
+                    </div>
+                </Tab>
+                <Tab label={"Rejected"}>
+                    <div className="grid grid-cols-3 gap-6 ml-24 mr-8 my-8 ">
+                        {tasks.map((task) => {
+                            if (task.taskApproved === "no") {
+                                return <TaskCard key={task.taskID} task={task} approved={task.taskApproved} onClick={onCardClick} />
+                            }
+                        })}
+                    </div>
+
+                    <TaskModal open={isModalOpen} onClose={onClosingTaskModal} />
+
+                    <div className={`fixed top-[45vh] left-[50vw] text-blue-600 animate-spin ${spin ? "opacity-100" : "opacity-0"}`}>
+                        <ImSpinner6 size={100} />
+                    </div>
+                </Tab>
+                <Tab label={"New Arrivals"}>
+                    <div className="grid grid-cols-3 gap-6 ml-24 mr-8 my-8 ">
+                        {tasks.map((task) => {
+                            if (task.taskApproved === "not-yet") {
+                                return <TaskCard key={task.taskID} task={task} approved={task.taskApproved} onClick={onCardClick} />
+                            }
+                        })}
+                    </div>
+
+                    <TaskModal open={isModalOpen} onClose={onClosingTaskModal} />
+
+                    <div className={`fixed top-[45vh] left-[50vw] text-blue-600 animate-spin ${spin ? "opacity-100" : "opacity-0"}`}>
+                        <ImSpinner6 size={100} />
+                    </div>
+                </Tab>
+            </Tabs>
         </taskContext.Provider>
     );
 };
