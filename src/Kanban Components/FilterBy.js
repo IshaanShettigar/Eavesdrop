@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext } from "react";
 import { FaFilter } from "react-icons/fa"
 
-const FilterBy = ({ setCompleted, setIncomplete, setReviewed, setSpin }) => {
+const FilterBy = ({ setCompleted, setIncomplete, setReviewed, setBacklog, setSpin }) => {
     const [filter, setFilter] = useState("")
     // fetch with options set to priority: filter
     useEffect(() => {
@@ -24,7 +24,8 @@ const FilterBy = ({ setCompleted, setIncomplete, setReviewed, setSpin }) => {
                 setSpin(false)
                 setCompleted(json.data.filter((task) => task.taskCompleted && !task.taskReviewed));
                 setReviewed(json.data.filter((task) => task.taskReviewed && task.taskCompleted));
-                setIncomplete(json.data.filter((task) => !task.taskCompleted && !task.taskReviewed));
+                setIncomplete(json.data.filter((task) => !task.taskCompleted && !task.taskReviewed && !task.taskBacklog));
+                setBacklog(json.data.filter((task) => !task.taskCompleted && !task.taskReviewed && task.taskBacklog));
             } catch (error) {
                 console.log("error", error);
             }

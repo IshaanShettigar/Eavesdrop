@@ -32,8 +32,8 @@ const updateTask = async (req, res) => {
 
 
 const handleKanbanDrop = async (req, res) => {
-    const { taskCompleted, taskReviewed } = req.body;
-    await Task.findOneAndUpdate({ taskID: req.params.taskID }, { taskCompleted: taskCompleted, taskReviewed: taskReviewed })
+    const { taskCompleted, taskReviewed, taskBacklog } = req.body;
+    await Task.findOneAndUpdate({ taskID: req.params.taskID }, { taskCompleted: taskCompleted, taskReviewed: taskReviewed, taskBacklog: taskBacklog })
     res.status(200).json({ msg: "Route working" })
 }
 

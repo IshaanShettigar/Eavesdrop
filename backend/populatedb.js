@@ -15,6 +15,7 @@ const tasks = [
         "taskApproved": "yes",
         "taskCompleted": "yes",
         "taskReviewed": "yes",
+        "taskBacklog": "no",
     },
     {
         "taskName": "[BUG] Sidebar tooltip is being displayed below (Z) tasks",
@@ -25,6 +26,7 @@ const tasks = [
         "taskApproved": "no",
         "taskCompleted": "no",
         "taskReviewed": "no",
+        "taskBacklog": "no",
     },
     {
         "taskName": "Fix the hover modal position when modal is out of bounds for PLET and UTH",
@@ -36,6 +38,7 @@ const tasks = [
         "taskApproved": "yes",
         "taskCompleted": "yes",
         "taskReviewed": "no",
+        "taskBacklog": "no",
     },
     {
         "taskName": "When refreshing the page or opening a diagram that you just saved, the linsk dont show up cause of some error",
@@ -46,6 +49,7 @@ const tasks = [
         "taskApproved": "yes",
         "taskCompleted": "yes",
         "taskReviewed": "no",
+        "taskBacklog": "no",
     },
     {
         "taskName": "New Feature: When the user drags an element out of bounds then translate the paper in that direction",
@@ -56,6 +60,7 @@ const tasks = [
         "taskApproved": "not-yet",
         "taskCompleted": "no",
         "taskReviewed": "no",
+        "taskBacklog": "no",
     },
     {
         "taskName": "Use browser local storage to store the current sessions state ",
@@ -66,6 +71,7 @@ const tasks = [
         "taskApproved": "not-yet",
         "taskCompleted": "no",
         "taskReviewed": "no",
+        "taskBacklog": "no",
     },
     {
         "taskName": "Platform element doesnt scale properly. I messed up the calc expressions somewhere",
@@ -76,6 +82,7 @@ const tasks = [
         "taskApproved": "not-yet",
         "taskCompleted": "no",
         "taskReviewed": "no",
+        "taskBacklog": "no",
     },
     {
         "taskName": "Add a 'Supported Databases' section in the homepage ",
@@ -86,6 +93,7 @@ const tasks = [
         "taskApproved": "not-yet",
         "taskCompleted": "no",
         "taskReviewed": "no",
+        "taskBacklog": "no",
     },
     {
 
@@ -97,6 +105,7 @@ const tasks = [
         "taskApproved": "not-yet",
         "taskCompleted": "no",
         "taskReviewed": "no",
+        "taskBacklog": "no",
     }
 ]
 

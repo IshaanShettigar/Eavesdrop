@@ -33,6 +33,10 @@ const taskSchema = new mongoose.Schema({
     taskReviewed: {
         type: Boolean,
         default: true
+    },
+    taskBacklog: {
+        type: Boolean,
+        default: false
     }
 })
 

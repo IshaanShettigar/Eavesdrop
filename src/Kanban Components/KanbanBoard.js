@@ -11,6 +11,7 @@ export default function KanbanBoard() {
     const [completed, setCompleted] = useState([]);
     const [incomplete, setIncomplete] = useState([]);
     const [reviewed, setReviewed] = useState([]);
+    const [backlog, setBacklog] = useState([]);
 
     const [spin, setSpin] = useState(true)
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -41,7 +42,8 @@ export default function KanbanBoard() {
                 // completed and not reviewed
                 setCompleted(json.data.filter((task) => task.taskCompleted && !task.taskReviewed));
                 setReviewed(json.data.filter((task) => task.taskReviewed && task.taskCompleted));
-                setIncomplete(json.data.filter((task) => !task.taskCompleted && !task.taskReviewed));
+                setIncomplete(json.data.filter((task) => !task.taskCompleted && !task.taskReviewed && !task.taskBacklog));
+                setBacklog(json.data.filter((task) => !task.taskCompleted && !task.taskReviewed && task.taskBacklog));
             } catch (error) {
                 console.log("error", error);
             }
@@ -79,13 +81,17 @@ export default function KanbanBoard() {
             setCompleted(removeItemById(draggableId, completed))
         } else if (source.droppableId == 2) {
             setCompleted(removeItemById(draggableId, completed));
-        } else {
+        } else if (source.droppableId == 3) {
+            setBacklog(removeItemById(draggableId, backlog));
+            // setIncomplete(removeItemById(draggableId, incomplete));
+        }
+        else {
             setIncomplete(removeItemById(draggableId, incomplete));
         }
 
         // GET ITEM
 
-        const task = findItemById(draggableId, [...incomplete, ...completed, ...reviewed]);
+        const task = findItemById(draggableId, [...incomplete, ...completed, ...reviewed, ...backlog]);
 
         //ADD ITEM
         if (destination.droppableId == 4) {
@@ -93,7 +99,8 @@ export default function KanbanBoard() {
                 method: 'POST',
                 body: JSON.stringify({
                     "taskCompleted": "true",
-                    "taskReviewed": "true"
+                    "taskReviewed": "true",
+                    "taskBacklog": "false"
                 }),
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -107,7 +114,8 @@ export default function KanbanBoard() {
                 method: 'POST',
                 body: JSON.stringify({
                     "taskCompleted": "true",
-                    "taskReviewed": "false"
+                    "taskReviewed": "false",
+                    "taskBacklog": "false"
                 }),
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -116,12 +124,28 @@ export default function KanbanBoard() {
 
             fetch(url + draggableId, options).then((response) => response.json()).then((data) => { console.log(data.msg) })
             setCompleted([{ ...task, completed: !task.completed }, ...completed]);
+        } else if (destination.droppableId == 3) {
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({
+                    "taskCompleted": "false",
+                    "taskReviewed": "false",
+                    "taskBacklog": "true"
+                }),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                }
+            }
+            
+            fetch(url + draggableId, options).then((response) => response.json()).then((data) => { console.log(data.msg) })
+            setBacklog([{ ...task, backlog: !task.backlog }, ...backlog]);
         } else {
             const options = {
                 method: 'POST',
                 body: JSON.stringify({
                     "taskCompleted": "false",
-                    "taskReviewed": "false"
+                    "taskReviewed": "false",
+                    "taskBacklog": "false"
                 }),
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -134,11 +158,11 @@ export default function KanbanBoard() {
     };
 
     function findItemById(id, array) {
-        return array.find((item) => item.taskID == id);
+        return array.find((item) => item.taskID === id);
     }
 
     function removeItemById(id, array) {
-        return array.filter((item) => item.taskID != id);
+        return array.filter((item) => item.taskID !== id);
     }
 
     return (
@@ -147,7 +171,7 @@ export default function KanbanBoard() {
                 <h2 className="font-semibold  text-4xl text-blue-500 text-center my-5" >Kanban Board</h2>
                 <div className="flex justify-between ml-24 mr-10">
                     <SearchBar />
-                    <FilterBy setCompleted={setCompleted} setReviewed={setReviewed} setIncomplete={setIncomplete} setSpin={setSpin} />
+                    <FilterBy setCompleted={setCompleted} setReviewed={setReviewed} setIncomplete={setIncomplete} setBacklog={setBacklog} setSpin={setSpin} />
                 </div>
                 <div className="flex flex-col items-center justify-center ">
                     {/* <div className="mx-auto"> */}
@@ -158,7 +182,7 @@ export default function KanbanBoard() {
                         <div className="grid grid-cols-4 gap-6 ml-24 mr-8 my-4">
                             <Column title={"To Do"} tasks={incomplete} id={"1"} onClick={onCardClick} />
                             <Column title={"Done"} tasks={completed} id={"2"} onClick={onCardClick} />
-                            <Column title={"Backlog"} tasks={[]} id={"3"} onClick={onCardClick} />
+                            <Column title={"Backlog"} tasks={backlog} id={"3"} onClick={onCardClick} />
                             <Column title={"Reviewed"} tasks={reviewed} id={"4"} onClick={onCardClick} />
                         </div>
                     </DragDropContext>
