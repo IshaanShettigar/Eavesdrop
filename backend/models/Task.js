@@ -18,6 +18,9 @@ const taskSchema = new mongoose.Schema({
         enum: ["Low", "High", "Medium"],
         default: ["Low"]
     },
+    taskStartTime: {
+        type: Date,
+    },
     taskDeadline: {
         type: Date,
     },

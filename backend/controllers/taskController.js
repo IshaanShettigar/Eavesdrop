@@ -8,7 +8,7 @@ const getAllTasks = async (req, res) => {
 const handleTaskApproveReject = async (req, res) => {
     const { action } = req.body;
     if (action === "approve") {
-        await Task.findOneAndUpdate({ taskID: req.params.taskID }, { taskApproved: "yes" });
+        await Task.findOneAndUpdate({ taskID: req.params.taskID }, { taskApproved: "yes", taskStartTime: new Date() });
         res.status(200).json({ msg: "Approved Task" })
 
     }

@@ -1,0 +1,594 @@
+[
+    {
+        "month": "November",
+        "year": "2023",
+        "days": [
+            {
+                "day": 30,
+                "disabled": "true"
+            },
+            {
+                "day": 31,
+                "disabled": "true"
+            },
+            {
+                "day": 1,
+                "disabled": "false"
+            },
+            {
+                "day": 2,
+                "disabled": "false"
+            },
+            {
+                "day": 3,
+                "disabled": "false"
+            },
+            {
+                "day": 4,
+                "disabled": "false"
+            },
+            {
+                "day": 5,
+                "disabled": "false"
+            },
+            {
+                "day": 6,
+                "disabled": "false"
+            },
+            {
+                "day": 7,
+                "disabled": "false"
+            },
+            {
+                "day": 8,
+                "disabled": "false"
+            },
+            {
+                "day": 9,
+                "disabled": "false"
+            },
+            {
+                "day": 10,
+                "disabled": "false"
+            },
+            {
+                "day": 11,
+                "disabled": "false"
+            },
+            {
+                "day": 12,
+                "disabled": "false"
+            },
+            {
+                "day": 13,
+                "disabled": "false"
+            },
+            {
+                "day": 14,
+                "disabled": "false"
+            },
+            {
+                "day": 15,
+                "disabled": "false"
+            },
+            {
+                "day": 16,
+                "disabled": "false"
+            },
+            {
+                "day": 17,
+                "disabled": "false"
+            },
+            {
+                "day": 18,
+                "disabled": "false"
+            },
+            {
+                "day": 19,
+                "disabled": "false"
+            },
+            {
+                "day": 20,
+                "disabled": "false"
+            },
+            {
+                "day": 21,
+                "disabled": "false"
+            },
+            {
+                "day": 22,
+                "disabled": "false"
+            },
+            {
+                "day": 23,
+                "disabled": "false"
+            },
+            {
+                "day": 24,
+                "disabled": "false"
+            },
+            {
+                "day": 25,
+                "disabled": "false"
+            },
+            {
+                "day": 26,
+                "disabled": "false"
+            },
+            {
+                "day": 27,
+                "disabled": "false"
+            },
+            {
+                "day": 28,
+                "disabled": "false"
+            },
+            {
+                "day": 29,
+                "disabled": "false"
+            },
+            {
+                "day": 30,
+                "disabled": "false"
+            },
+            {
+                "day": 1,
+                "disabled": "true"
+            },
+            {
+                "day": 2,
+                "disabled": "true"
+            },
+            {
+                "day": 3,
+                "disabled": "true"
+            }
+        ]
+    },
+    {
+        "month": "December",
+        "year": "2023",
+        "days": [
+            {
+                "day": 27,
+                "disabled": "true"
+            },
+            {
+                "day": 28,
+                "disabled": "true"
+            },
+            {
+                "day": 29,
+                "disabled": "true"
+            },
+            {
+                "day": 30,
+                "disabled": "true"
+            },
+            {
+                "day": 1,
+                "disabled": "false"
+            },
+            {
+                "day": 2,
+                "disabled": "false"
+            },
+            {
+                "day": 3,
+                "disabled": "false"
+            },
+            {
+                "day": 4,
+                "disabled": "false"
+            },
+            {
+                "day": 5,
+                "disabled": "false"
+            },
+            {
+                "day": 6,
+                "disabled": "false"
+            },
+            {
+                "day": 7,
+                "disabled": "false"
+            },
+            {
+                "day": 8,
+                "disabled": "false"
+            },
+            {
+                "day": 9,
+                "disabled": "false"
+            },
+            {
+                "day": 10,
+                "disabled": "false"
+            },
+            {
+                "day": 11,
+                "disabled": "false"
+            },
+            {
+                "day": 12,
+                "disabled": "false"
+            },
+            {
+                "day": 13,
+                "disabled": "false"
+            },
+            {
+                "day": 14,
+                "disabled": "false"
+            },
+            {
+                "day": 15,
+                "disabled": "false"
+            },
+            {
+                "day": 16,
+                "disabled": "false"
+            },
+            {
+                "day": 17,
+                "disabled": "false"
+            },
+            {
+                "day": 18,
+                "disabled": "false"
+            },
+            {
+                "day": 19,
+                "disabled": "false"
+            },
+            {
+                "day": 20,
+                "disabled": "false"
+            },
+            {
+                "day": 21,
+                "disabled": "false"
+            },
+            {
+                "day": 22,
+                "disabled": "false"
+            },
+            {
+                "day": 23,
+                "disabled": "false"
+            },
+            {
+                "day": 24,
+                "disabled": "false"
+            },
+            {
+                "day": 25,
+                "disabled": "false"
+            },
+            {
+                "day": 26,
+                "disabled": "false"
+            },
+            {
+                "day": 27,
+                "disabled": "false"
+            },
+            {
+                "day": 28,
+                "disabled": "false"
+            },
+            {
+                "day": 29,
+                "disabled": "false"
+            },
+            {
+                "day": 30,
+                "disabled": "false"
+            },
+            {
+                "day": 31,
+                "disabled": "false"
+            }
+        ]
+    },
+    {
+        "month": "January",
+        "year": "2024",
+        "days": [
+            {
+                "day": 1,
+                "disabled": "false"
+            },
+            {
+                "day": 2,
+                "disabled": "false"
+            },
+            {
+                "day": 3,
+                "disabled": "false"
+            },
+            {
+                "day": 4,
+                "disabled": "false"
+            },
+            {
+                "day": 5,
+                "disabled": "false"
+            },
+            {
+                "day": 6,
+                "disabled": "false"
+            },
+            {
+                "day": 7,
+                "disabled": "false"
+            },
+            {
+                "day": 8,
+                "disabled": "false"
+            },
+            {
+                "day": 9,
+                "disabled": "false"
+            },
+            {
+                "day": 10,
+                "disabled": "false"
+            },
+            {
+                "day": 11,
+                "disabled": "false"
+            },
+            {
+                "day": 12,
+                "disabled": "false"
+            },
+            {
+                "day": 13,
+                "disabled": "false"
+            },
+            {
+                "day": 14,
+                "disabled": "false"
+            },
+            {
+                "day": 15,
+                "disabled": "false"
+            },
+            {
+                "day": 16,
+                "disabled": "false"
+            },
+            {
+                "day": 17,
+                "disabled": "false"
+            },
+            {
+                "day": 18,
+                "disabled": "false"
+            },
+            {
+                "day": 19,
+                "disabled": "false"
+            },
+            {
+                "day": 20,
+                "disabled": "false"
+            },
+            {
+                "day": 21,
+                "disabled": "false"
+            },
+            {
+                "day": 22,
+                "disabled": "false"
+            },
+            {
+                "day": 23,
+                "disabled": "false"
+            },
+            {
+                "day": 24,
+                "disabled": "false"
+            },
+            {
+                "day": 25,
+                "disabled": "false"
+            },
+            {
+                "day": 26,
+                "disabled": "false"
+            },
+            {
+                "day": 27,
+                "disabled": "false"
+            },
+            {
+                "day": 28,
+                "disabled": "false"
+            },
+            {
+                "day": 29,
+                "disabled": "false"
+            },
+            {
+                "day": 30,
+                "disabled": "false"
+            },
+            {
+                "day": 31,
+                "disabled": "false"
+            },
+            {
+                "day": 1,
+                "disabled": "true"
+            },
+            {
+                "day": 2,
+                "disabled": "true"
+            },
+            {
+                "day": 3,
+                "disabled": "true"
+            },
+            {
+                "day": 4,
+                "disabled": "true"
+            }
+        ]
+    },
+    {
+        "month": "February",
+        "year": "2024",
+        "days": [
+            {
+                "day": 29,
+                "disabled": "true"
+            },
+            {
+                "day": 30,
+                "disabled": "true"
+            },
+            {
+                "day": 31,
+                "disabled": "true"
+            },
+            {
+                "day": 1,
+                "disabled": "false"
+            },
+            {
+                "day": 2,
+                "disabled": "false"
+            },
+            {
+                "day": 3,
+                "disabled": "false"
+            },
+            {
+                "day": 4,
+                "disabled": "false"
+            },
+            {
+                "day": 5,
+                "disabled": "false"
+            },
+            {
+                "day": 6,
+                "disabled": "false"
+            },
+            {
+                "day": 7,
+                "disabled": "false"
+            },
+            {
+                "day": 8,
+                "disabled": "false"
+            },
+            {
+                "day": 9,
+                "disabled": "false"
+            },
+            {
+                "day": 10,
+                "disabled": "false"
+            },
+            {
+                "day": 11,
+                "disabled": "false"
+            },
+            {
+                "day": 12,
+                "disabled": "false"
+            },
+            {
+                "day": 13,
+                "disabled": "false"
+            },
+            {
+                "day": 14,
+                "disabled": "false"
+            },
+            {
+                "day": 15,
+                "disabled": "false"
+            },
+            {
+                "day": 16,
+                "disabled": "false"
+            },
+            {
+                "day": 17,
+                "disabled": "false"
+            },
+            {
+                "day": 18,
+                "disabled": "false"
+            },
+            {
+                "day": 19,
+                "disabled": "false"
+            },
+            {
+                "day": 20,
+                "disabled": "false"
+            },
+            {
+                "day": 21,
+                "disabled": "false"
+            },
+            {
+                "day": 22,
+                "disabled": "false"
+            },
+            {
+                "day": 23,
+                "disabled": "false"
+            },
+            {
+                "day": 24,
+                "disabled": "false"
+            },
+            {
+                "day": 25,
+                "disabled": "false"
+            },
+            {
+                "day": 26,
+                "disabled": "false"
+            },
+            {
+                "day": 27,
+                "disabled": "false"
+            },
+            {
+                "day": 28,
+                "disabled": "false"
+            },
+            {
+                "day": 29,
+                "disabled": "false"
+            },
+            {
+                "day": 30,
+                "disabled": "false"
+            },
+            {
+                "day": 31,
+                "disabled": "false"
+            },
+            {
+                "day": 1,
+                "disabled": "true"
+            },
+            {
+                "day": 2,
+                "disabled": "true"
+            },
+            {
+                "day": 3,
+                "disabled": "true"
+            }
+        ]
+    }
+]

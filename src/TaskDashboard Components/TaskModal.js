@@ -49,7 +49,7 @@ const TaskModal = ({ open = false, onClose }) => {
 
             fetch(url + `${modalState["taskID"]}`, options).then((response) => { return response.json() }).then((data) => console.log(data.msg))
 
-            setModalState({ ...modalState, "taskApproved": "yes" })
+            setModalState({ ...modalState, "taskApproved": "yes", })
             // onClose()
         }
 
