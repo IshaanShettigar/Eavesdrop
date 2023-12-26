@@ -123,7 +123,7 @@ const Calendar = () => {
                                     return data.days.slice(0, 7).map((day) => {
 
                                         return (
-                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} isCurrentDay={new Date().getDate() == day.day} />
+                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} />
                                         )
                                     })
                                 }
@@ -136,7 +136,7 @@ const Calendar = () => {
                                     return data.days.slice(7, 14).map((day) => {
 
                                         return (
-                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} isCurrentDay={new Date().getDate() == day.day} />
+                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} />
                                         )
                                     })
                                 }
@@ -150,7 +150,7 @@ const Calendar = () => {
                                     return data.days.slice(14, 21).map((day) => {
 
                                         return (
-                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} isCurrentDay={new Date().getDate() == day.day} />
+                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} />
                                         )
                                     })
                                 }
@@ -164,7 +164,7 @@ const Calendar = () => {
                                     return data.days.slice(21, 28).map((day) => {
 
                                         return (
-                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} isCurrentDay={new Date().getDate() == day.day} />
+                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} />
                                         )
                                     })
                                 }
@@ -177,7 +177,7 @@ const Calendar = () => {
                                 if (data.active) {
                                     return data.days.slice(28, 35).map((day) => {
                                         return (
-                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} isCurrentDay={new Date().getDate() == day.day} />
+                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} />
                                         )
                                     })
                                 }
@@ -209,7 +209,7 @@ const Event = ({ displayText, bgColor = "bg-purple-600", textColor = "text-purpl
     )
 }
 
-const DayCard = ({ dayNumber, month, year, isDisabled = false, className = "", tasks, isCurrentDay = false }) => {
+const DayCard = ({ dayNumber, month, year, isDisabled = false, className = "", tasks }) => {
     const eventcolors = {
         "1": {
             "bgColor": "bg-purple-600",
@@ -248,6 +248,8 @@ const DayCard = ({ dayNumber, month, year, isDisabled = false, className = "", t
             "textColor": "text-cyan-600"
         },
     }
+
+    const isCurrentDay = (new Date().getDate() == dayNumber && month == new Date().toLocaleString('default', { month: 'long' }))
     return (
         <td className={`border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition  duration-300 ease
          ${isDisabled ? "bg-gray-100" : "cursor-pointer  hover:bg-stone-100"}
