@@ -19,9 +19,9 @@ const SideBar = () => {
     return (
         <div className="fixed top-0 left-0 flex flex-col h-screen w-16 bg-slate-200 text-blue-500 shadow-2xl pt-5">
             <SideBarIcon icon={<FaTasks size={24} />} onClick={() => handleIconClick("tasks", "tasks")} isActive={activeIcon === "tasks"} text="Incoming Tasks" />
-            <SideBarIcon icon={<IoAnalytics size={28} />} onClick={() => handleIconClick("analytics", "analytics")} isActive={activeIcon === "analytics"} text="Analytics" />
-            <SideBarIcon icon={<FaCalendar size={23} />} onClick={() => handleIconClick("calendar", "calendar")} isActive={activeIcon === "calendar"} text="Calendar" />
             <SideBarIcon icon={<MdOutlineViewKanban size={28} />} onClick={() => handleIconClick("kanban", "kanban")} isActive={activeIcon === "kanban"} text="Kanban" />
+            <SideBarIcon icon={<FaCalendar size={23} />} onClick={() => handleIconClick("calendar", "calendar")} isActive={activeIcon === "calendar"} text="Calendar" />
+            <SideBarIcon icon={<IoAnalytics size={28} />} onClick={() => handleIconClick("analytics", "analytics")} isActive={activeIcon === "analytics"} text="Analytics" />
             <SideBarIcon icon={<HiUsers size={28} />} onClick={() => handleIconClick("employees", "employees")} isActive={activeIcon === "employees"} text="Manage Employees" />
         </div>
     )

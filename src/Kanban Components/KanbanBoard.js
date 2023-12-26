@@ -5,6 +5,7 @@ import { KanbanModal } from "./KanbanModal";
 import { ImSpinner6 } from "react-icons/im";
 import { FilterBy } from "./FilterBy";
 import { SearchBar } from "./SearchBar";
+import { AIButton } from "./AskAI";
 const kanbanModalContext = createContext(null)
 
 export default function KanbanBoard() {
@@ -136,7 +137,7 @@ export default function KanbanBoard() {
                     'Content-type': 'application/json; charset=UTF-8',
                 }
             }
-            
+
             fetch(url + draggableId, options).then((response) => response.json()).then((data) => { console.log(data.msg) })
             setBacklog([{ ...task, backlog: !task.backlog }, ...backlog]);
         } else {
@@ -191,6 +192,7 @@ export default function KanbanBoard() {
                         <ImSpinner6 size={100} />
                     </div>
                 </div>
+                <AIButton />
             </div>
         </kanbanModalContext.Provider>
     );

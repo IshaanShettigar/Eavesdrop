@@ -266,7 +266,7 @@ const DayCard = ({ dayNumber, month, year, isDisabled = false, className = "", t
                             const endMonth = task.taskDeadline.toLocaleString('default', { month: 'long' })
                             // Not working
                             {/* if (dayNumber <= task.taskDeadline.getDate() && dayNumber >= task.taskStartTime.getDate() && isDisabled === false && (month === startMonth || month === endMonth)) { */ }
-                            if (curDate < task.taskDeadline && curDate > task.taskStartTime && isDisabled === false && (month === startMonth || month === endMonth)) {
+                            if (curDate <= task.taskDeadline && curDate >= task.taskStartTime && isDisabled === false && (month === startMonth || month === endMonth)) {
 
                                 return (
                                     <div key={index}>
