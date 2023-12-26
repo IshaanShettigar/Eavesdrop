@@ -73,7 +73,7 @@ const Calendar = () => {
         setCalendar(newCalendar)
     }
     return (
-        <div className="mx-auto mt-10">
+        <div className="mx-auto my-10">
             <div className="wrapper bg-white rounded shadow w-full ">
                 <div className="header flex justify-between border-b p-2">
                     <span className="text-lg font-bold">
@@ -123,7 +123,7 @@ const Calendar = () => {
                                     return data.days.slice(0, 7).map((day) => {
 
                                         return (
-                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} />
+                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} isCurrentDay={new Date().getDate() == day.day} />
                                         )
                                     })
                                 }
@@ -136,7 +136,7 @@ const Calendar = () => {
                                     return data.days.slice(7, 14).map((day) => {
 
                                         return (
-                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} />
+                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} isCurrentDay={new Date().getDate() == day.day} />
                                         )
                                     })
                                 }
@@ -150,7 +150,7 @@ const Calendar = () => {
                                     return data.days.slice(14, 21).map((day) => {
 
                                         return (
-                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} />
+                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} isCurrentDay={new Date().getDate() == day.day} />
                                         )
                                     })
                                 }
@@ -164,7 +164,7 @@ const Calendar = () => {
                                     return data.days.slice(21, 28).map((day) => {
 
                                         return (
-                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} />
+                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} isCurrentDay={new Date().getDate() == day.day} />
                                         )
                                     })
                                 }
@@ -176,9 +176,8 @@ const Calendar = () => {
                             {calendar.map((data) => {
                                 if (data.active) {
                                     return data.days.slice(28, 35).map((day) => {
-
                                         return (
-                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} />
+                                            <DayCard dayNumber={day.day} month={data.month} year={data.year} tasks={tasks} isDisabled={day.disabled} isCurrentDay={new Date().getDate() == day.day} />
                                         )
                                     })
                                 }
@@ -210,7 +209,7 @@ const Event = ({ displayText, bgColor = "bg-purple-600", textColor = "text-purpl
     )
 }
 
-const DayCard = ({ dayNumber, month, year, isDisabled = false, className = "", tasks }) => {
+const DayCard = ({ dayNumber, month, year, isDisabled = false, className = "", tasks, isCurrentDay = false }) => {
     const eventcolors = {
         "1": {
             "bgColor": "bg-purple-600",
@@ -254,8 +253,8 @@ const DayCard = ({ dayNumber, month, year, isDisabled = false, className = "", t
          ${isDisabled ? "bg-gray-100" : "cursor-pointer  hover:bg-stone-100"}
          ${className}`}>
             <div className="flex flex-col h-40  xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden ">
-                <div className="top h-5 w-full">
-                    <span className="text-gray-500">{dayNumber}</span>
+                <div className="top h-5 w-full mb-2 mt-1">
+                    <span className={`${isCurrentDay ? "bg-indigo-600 text-white rounded-xl" : "text-gray-500"} px-1 py-[2px] `}>{dayNumber}</span>
                 </div>
                 <div className="flex-grow h-30 py-1 w-full "> {/* Removed grid grid-cols-1 grid-rows-5 gap-0 */}
                     {
