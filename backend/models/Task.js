@@ -1,6 +1,12 @@
 const mongoose = require('mongoose')
 
 const taskSchema = new mongoose.Schema({
+    projectName: {
+        type: String
+    },
+    creatorEmail: {
+        type: String
+    },
     taskID: {
         type: String,
     },
@@ -17,6 +23,19 @@ const taskSchema = new mongoose.Schema({
         type: String,
         enum: ["Low", "High", "Medium"],
         default: ["Low"]
+    },
+    taskTags: {
+        type: String // This will be comma separated string
+    },
+    taskType: {
+        type: String,
+        enum: ["Improvement", "Bug-Fix", "New-Feature", "Sub-Task", "Miscellaneous"]
+    },
+    taskAssignees: {
+        type: String  // This will be comma separated string
+    },
+    taskDepartments: {
+        type: String // This will be a comma separated string FrontEnd, BackEnd, QA, MLOps,  Tech-Support, Design
     },
     taskStartTime: {
         type: Date,
@@ -42,6 +61,8 @@ const taskSchema = new mongoose.Schema({
         default: false
     }
 })
+
+
 
 
 module.exports = mongoose.model("tasks", taskSchema)

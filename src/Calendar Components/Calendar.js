@@ -4,11 +4,55 @@ import calendarData from './calendar.json';
 
 
 const Calendar = () => {
-
+    const colors = [
+        {
+            "bgColor": "bg-purple-600",
+            "textColor": "text-purple-600"
+        }, {
+            "bgColor": "bg-teal-600",
+            "textColor": "text-teal-600"
+        }, {
+            "bgColor": "bg-yellow-600",
+            "textColor": "text-yellow-600"
+        }, {
+            "bgColor": "bg-pink-600",
+            "textColor": "text-pink-600"
+        }, {
+            "bgColor": "bg-fuchsia-600",
+            "textColor": "text-fuchsia-600"
+        }, {
+            "bgColor": "bg-indigo-600",
+            "textColor": "text-indigo-600"
+        }, {
+            "bgColor": "bg-orange-600",
+            "textColor": "text-orange-600"
+        }, {
+            "bgColor": "bg-cyan-600",
+            "textColor": "text-cyan-600"
+        }, {
+            "bgColor": "bg-orange-600",
+            "textColor": "text-orange-600"
+        }, {
+            "bgColor": "bg-amber-600",
+            "textColor": "text-amber-600"
+        }, {
+            "bgColor": "bg-lime-600",
+            "textColor": "text-lime-600"
+        }, {
+            "bgColor": "bg-red-600",
+            "textColor": "text-red-600"
+        },
+        {
+            "bgColor": "bg-pink-600",
+            "textColor": "text-pink-600"
+        }, {
+            "bgColor": "bg-green-600",
+            "textColor": "text-green-600"
+        }]
     const [calendar, setCalendar] = useState([]);
     const [tasks, setTasks] = useState([])
     const [spin, setSpin] = useState(true);
-
+    // console.log(Math.floor(Math.random() * (colors.length)));
     useEffect(() => {
         const url = "http://localhost:5000/api/tasks/kanban"
 
@@ -21,6 +65,9 @@ const Calendar = () => {
                 json.data = json.data.map((task) => {
                     task.taskDeadline = new Date(task.taskDeadline.split('T')[0])
                     task.taskStartTime = new Date(task.taskStartTime.split('T')[0])
+                    const i = colors[Math.floor(Math.random() * (colors.length))]
+                    task.bgColor = i['bgColor']
+                    task.textColor = i['textColor']
                     return task;
                 })
                 setTasks(json.data);
@@ -210,44 +257,7 @@ const Event = ({ displayText, bgColor = "bg-purple-600", textColor = "text-purpl
 }
 
 const DayCard = ({ dayNumber, month, year, isDisabled = false, className = "", tasks }) => {
-    const eventcolors = {
-        "1": {
-            "bgColor": "bg-purple-600",
-            "textColor": "text-purple-600"
-        },
-        "2": {
-            "bgColor": "bg-blue-600",
-            "textColor": "text-blue-600"
-        },
-        "3": {
-            "bgColor": "bg-teal-600",
-            "textColor": "text-teal-600"
-        },
-        "4": {
-            "bgColor": "bg-yellow-600",
-            "textColor": "text-yellow-600"
-        },
-        "5": {
-            "bgColor": "bg-pink-600",
-            "textColor": "text-pink-600"
-        },
-        "6": {
-            "bgColor": "bg-fuchsia-600",
-            "textColor": "text-fuchsia-600"
-        },
-        "7": {
-            "bgColor": "bg-indigo-600",
-            "textColor": "text-indigo-600"
-        },
-        "8": {
-            "bgColor": "bg-orange-600",
-            "textColor": "text-orange-600"
-        },
-        "9": {
-            "bgColor": "bg-cyan-600",
-            "textColor": "text-cyan-600"
-        },
-    }
+
 
     const isCurrentDay = (new Date().getDate() == dayNumber && month == new Date().toLocaleString('default', { month: 'long' }))
     return (
@@ -256,21 +266,21 @@ const DayCard = ({ dayNumber, month, year, isDisabled = false, className = "", t
          ${className}`}>
             <div className="flex flex-col h-40  xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden ">
                 <div className="top h-5 w-full mb-2 mt-1">
-                    <span className={`${isCurrentDay ? "bg-indigo-600 text-white rounded-xl" : "text-gray-500"} px-1 py-[2px] `}>{dayNumber}</span>
+                    <span className={`${isCurrentDay ? "bg-indigo-600 text-white rounded-md" : "text-gray-500"} px-1 py-[2px] `}>{dayNumber}</span>
                 </div>
                 <div className="flex-grow h-30 py-1 w-full "> {/* Removed grid grid-cols-1 grid-rows-5 gap-0 */}
                     {
                         tasks.map((task, index) => {
+
                             const curDate = new Date(`${month} ${dayNumber}, ${year}`)
                             const startMonth = task.taskStartTime.toLocaleString('default', { month: 'long' })
                             const endMonth = task.taskDeadline.toLocaleString('default', { month: 'long' })
-                            // Not working
-                            {/* if (dayNumber <= task.taskDeadline.getDate() && dayNumber >= task.taskStartTime.getDate() && isDisabled === false && (month === startMonth || month === endMonth)) { */ }
+
                             if (curDate <= task.taskDeadline && curDate >= task.taskStartTime && isDisabled === false && (month === startMonth || month === endMonth)) {
 
                                 return (
                                     <div key={index}>
-                                        <Event displayText={`${task.taskID} ${task.taskName.slice(0, 10)}...`} bgColor={`${eventcolors[task.taskID]['bgColor']}`} textColor={`${eventcolors[task.taskID]['textColor']}`} />
+                                        <Event displayText={`${task.taskID} ${task.taskName.slice(0, 10)}...`} bgColor={task.bgColor} textColor={task.textColor} />
                                     </div>)
                             }
 
