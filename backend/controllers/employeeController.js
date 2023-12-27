@@ -7,4 +7,9 @@ const addEmployee = async (req, res) => {
     res.status(200).json({ msg: "Success!", "EmployeeDetails": emp })
 }
 
-module.exports = { addEmployee }
+const getEmployee = async (req, res) => {
+    const emps = await Employee.find({})
+    res.status(200).json({ msg: "Got employees, enjoy", data: emps })
+}
+
+module.exports = { addEmployee, getEmployee }

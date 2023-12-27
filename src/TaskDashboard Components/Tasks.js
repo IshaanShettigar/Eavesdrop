@@ -32,18 +32,19 @@ const Tasks = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [modalState, setModalState] = useState({
-        "taskID": "", "taskName": "", "taskDescription": "", "taskPriority": "", "taskDeadline": new Date()
+        "taskID": "", "taskName": "", "taskDescription": "", "taskPriority": "", "taskDeadline": new Date(), "taskAssignees": ""
     })
 
 
-    const onCardClick = (taskID, taskName, taskDescription, taskPriority, taskDeadline, taskApproved) => {
+    const onCardClick = (taskID, taskName, taskDescription, taskPriority, taskDeadline, taskApproved, taskAssignees) => {
         setModalState({
             "taskID": taskID,
             "taskName": taskName,
             "taskDescription": taskDescription,
             "taskPriority": taskPriority,
             "taskDeadline": taskDeadline,
-            "taskApproved": taskApproved
+            "taskApproved": taskApproved,
+            "taskAssignees": taskAssignees
         })
         setIsModalOpen(true)
     }
@@ -142,7 +143,7 @@ const TaskCard = ({ approved = "not-yet", task, onClick }) => {
         <div className={`border-t-8 ${approved === "yes" ? "border-green-600" : approved === "no" ? "border-red-500" : "border-gray-500"}
                          cursor-pointer shadow-xl bg-slate-50 hover:bg-gray-200 flex flex-col gap-4 px-2 py-3 
                          hover:scale-105 transform transition duration-200 h-full` }
-            onClick={() => onClick(task["taskID"], task["taskName"], task["taskDescription"], task["taskPriority"], task["taskDeadline"], task["taskApproved"])}>
+            onClick={() => onClick(task["taskID"], task["taskName"], task["taskDescription"], task["taskPriority"], task["taskDeadline"], task["taskApproved"], task["taskAssignees"])}>
 
             <span className="text-gray-800"><strong>Task Name: </strong> {task["taskName"]}</span>
 

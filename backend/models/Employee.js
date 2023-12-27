@@ -12,12 +12,19 @@ const employeeSchema = new mongoose.Schema({
     },
     employeeDepartment: {
         type: String,
-        enum: ["Backend", "Frontend", "Intern"],
+        enum: ["Backend", "Frontend", "MLOps", "QA"],
     },
-    employeePosition: {
+    employeeRole: {
         type: String,
         required: [true, "Please provide a Position"],
+    },
+    employeeExp: {
+        type: String
+    },
+    employeeSkillSet: {
+        type: String // This is a comma separated field.
     }
+
 })
 
 

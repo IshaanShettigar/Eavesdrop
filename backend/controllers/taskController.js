@@ -26,7 +26,9 @@ const handleTaskApproveReject = async (req, res) => {
 }
 
 const updateTask = async (req, res) => {
+
     await Task.findOneAndUpdate({ taskID: req.params.taskID }, { ...req.body })
+    // console.log(task, req.params.taskID)
     res.status(200).json({ msg: `Hit update task route taskID:${req.params.taskID}` })
 }
 

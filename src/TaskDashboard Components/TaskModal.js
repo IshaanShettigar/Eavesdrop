@@ -1,20 +1,41 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
-import { AssigneeIcon, taskContext } from "./Tasks";
-import { BsFillPersonFill } from "react-icons/bs";
-import { FaCalendarAlt } from "react-icons/fa";
+import { taskContext } from "./Tasks";
+import { FaCalendarAlt, FaPaintRoller } from "react-icons/fa";
+import { FaShieldVirus, FaServer, FaRobot, FaCheck } from "react-icons/fa6";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { AssigneeTab, AssigneeTabs } from "./AssigneeTabs";
 
 
 const TaskModal = ({ open = false, onClose }) => {
 
     const { modalState, setModalState } = useContext(taskContext);
-
+    const [empState, setEmpState] = useState([])
+    const [checked, setChecked] = useState(Array.from({ length: 28 }).fill(false))
     const disabledButton = "opacity-50 cursor-not-allowed";
 
     const url = "http://localhost:5000/api/tasks/"
+    const url2 = "http://localhost:5000/api/employee/"
+    useEffect(() => {
+        const fetchTaskData = async () => {
+            try {
+                const response = await fetch(url2);
+                let json = await response.json();
+                console.log(json.data)
+                setEmpState(json.data)
+
+            } catch (error) {
+                console.log("error", error);
+            }
+
+        };
+
+        fetchTaskData();
+        console.log(checked)
+    }, [])
+
     const onClickReject = () => {
         if (modalState["taskApproved"] === "not-yet") {
             const options = {
@@ -55,6 +76,53 @@ const TaskModal = ({ open = false, onClose }) => {
 
     }
 
+    const handleCheckboxChange = (event) => {
+        // Check if the checkbox is checked
+        // console.log(event);
+        if (event.target.checked) {
+            // Access the value of the select box and print it
+            let arr = modalState["taskAssignees"].split(',');
+            arr = arr.filter((ele) => {
+                if (ele !== "") {
+                    return ele;
+                }
+            })
+            console.log("Before", arr)
+            arr.push(event.target.value)
+            console.log("After", arr.toString() + ",")
+            setModalState({ ...modalState, "taskAssignees": arr.toString() + "," })
+            // console.log({ ...modalState, "taskAssignees": modalState["taskAssignees"] + event.target.value + "," });
+        }
+        else if (!event.target.checked) {
+            let arr = modalState["taskAssignees"].split(',');
+            arr = arr.filter((ele) => {
+                if (ele !== "") {
+                    return ele;
+                }
+            })
+            console.log("Before", arr)
+            arr = arr.filter((ele) => ele != event.target.value);
+            console.log("After", arr.toString() + ",")
+            setModalState({ ...modalState, "taskAssignees": arr.toString() + "," })
+        }
+    };
+
+    useEffect(() => {
+        const newChecked = [...checked]
+        let arr = modalState["taskAssignees"].split(',');
+        arr = arr.filter((ele) => {
+            if (ele !== "") {
+                return ele;
+            }
+        })
+
+        arr.forEach((ele) => {
+            newChecked[Number(ele)] = true;
+        })
+        setChecked(newChecked)
+    }, [modalState])
+
+
     return (
         // backdrop
         <div
@@ -79,13 +147,54 @@ const TaskModal = ({ open = false, onClose }) => {
                 <textarea value={modalState["taskDescription"]} onChange={(e) => setModalState({ ...modalState, "taskDescription": e.target.value })}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 my-2 h-auto" />
 
-
-                <div className="flex gap-4 items-center text-gray-800 text-sm mt-6">
-                    <label className="font-bold text-lg block ">Assignees:</label>
+                <label className="font-bold text-lg block mt-6 mb-1">Assignees:</label>
+                <div className="flex gap-4 items-center text-gray-800 text-sm">
                     <div className="flex gap-2">
-                        <AssigneeIcon icon={<BsFillPersonFill size={18} />} />
-                        <AssigneeIcon icon={<BsFillPersonFill size={18} />} />
-                        <AssigneeIcon icon={<BsFillPersonFill size={18} />} />
+                        <AssigneeTabs>
+
+                            <AssigneeTab label={"Frontend"} icon={<FaPaintRoller size={18} />}>
+                                <table className="w-full table-auto ml-3">
+                                    <thead className="font-bold border-2">
+                                        <tr className="text-center" >
+                                            <td><FaCheck size={15} /></td>
+                                            <td>ID</td>
+                                            <td>Name</td>
+                                            <td>Experience</td>
+                                            <td>Role</td>
+                                            <td>Skills</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody className=" border-y-2 border-x">
+                                        {empState.map((emp) => {
+                                            if (emp.employeeDepartment == "Frontend") {
+                                                return (
+                                                    <tr className="text-center">
+                                                        <td className="border">
+                                                            <input type="checkbox" value={emp.employeeID} onChange={handleCheckboxChange} checked={checked[emp.employeeID]} />
+                                                        </td>
+                                                        <td className="border">{emp.employeeID}</td>
+                                                        <td className="border">{emp.employeeName}</td>
+                                                        <td className="border">{emp.employeeExp}</td>
+                                                        <td className="border">{emp.employeeRole}</td>
+                                                        <td className="border">{emp.employeeSkillSet}</td>
+                                                    </tr>
+                                                )
+                                            }
+                                        })}
+
+                                    </tbody>
+                                </table>
+                            </AssigneeTab>
+                            <AssigneeTab label={"Backend"} icon={<FaServer size={18} />}>
+                                Backend
+                            </AssigneeTab>
+                            <AssigneeTab label={"MLOps"} icon={<FaRobot size={18} />}>
+                                MLOps
+                            </AssigneeTab>
+                            <AssigneeTab label={"QA"} icon={<FaShieldVirus size={18} />}>
+                                MLOps
+                            </AssigneeTab>
+                        </AssigneeTabs>
                     </div>
                 </div>
 
