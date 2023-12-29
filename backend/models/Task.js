@@ -37,6 +37,18 @@ const taskSchema = new mongoose.Schema({
     taskDepartments: {
         type: String // This will be a comma separated string FrontEnd, BackEnd, QA, MLOps,  Tech-Support, Design
     },
+    taskFrontend: {
+        type: String
+    },
+    taskBackend: {
+        type: String
+    },
+    taskMLOps: {
+        type: String
+    },
+    taskQA: {
+        type: String
+    },
     taskStartTime: {
         type: Date,
     },

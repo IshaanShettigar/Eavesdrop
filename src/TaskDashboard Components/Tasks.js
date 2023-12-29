@@ -32,11 +32,12 @@ const Tasks = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [modalState, setModalState] = useState({
-        "taskID": "", "taskName": "", "taskDescription": "", "taskPriority": "", "taskDeadline": new Date(), "taskAssignees": ""
+        "taskID": "", "taskName": "", "taskDescription": "", "taskPriority": "", "taskDeadline": new Date(), "taskAssignees": "",
+        "taskBackend": "", "taskFrontend": "", "taskQA": "", "taskMLOps": ""
     })
+    console.log(tasks)
 
-
-    const onCardClick = (taskID, taskName, taskDescription, taskPriority, taskDeadline, taskApproved, taskAssignees) => {
+    const onCardClick = (taskID, taskName, taskDescription, taskPriority, taskDeadline, taskApproved, taskAssignees, taskFrontend, taskBackend, taskQA, taskMLOps) => {
         setModalState({
             "taskID": taskID,
             "taskName": taskName,
@@ -44,7 +45,11 @@ const Tasks = () => {
             "taskPriority": taskPriority,
             "taskDeadline": taskDeadline,
             "taskApproved": taskApproved,
-            "taskAssignees": taskAssignees
+            "taskAssignees": taskAssignees,
+            "taskFrontend": taskFrontend,
+            "taskBackend": taskBackend,
+            "taskQA": taskQA,
+            "taskMLOps": taskMLOps
         })
         setIsModalOpen(true)
     }
@@ -143,7 +148,7 @@ const TaskCard = ({ approved = "not-yet", task, onClick }) => {
         <div className={`border-t-8 ${approved === "yes" ? "border-green-600" : approved === "no" ? "border-red-500" : "border-gray-500"}
                          cursor-pointer shadow-xl bg-slate-50 hover:bg-gray-200 flex flex-col gap-4 px-2 py-3 
                          hover:scale-105 transform transition duration-200 h-full` }
-            onClick={() => onClick(task["taskID"], task["taskName"], task["taskDescription"], task["taskPriority"], task["taskDeadline"], task["taskApproved"], task["taskAssignees"])}>
+            onClick={() => onClick(task["taskID"], task["taskName"], task["taskDescription"], task["taskPriority"], task["taskDeadline"], task["taskApproved"], task["taskAssignees"], task["taskFrontend"], task["taskBackend"], task["taskQA"], task["taskMLOps"])}>
 
             <span className="text-gray-800"><strong>Task Name: </strong> {task["taskName"]}</span>
 
@@ -154,14 +159,14 @@ const TaskCard = ({ approved = "not-yet", task, onClick }) => {
 
 
 
-            <div className="flex gap-4 items-center text-gray-800 text-sm">
+            {/* <div className="flex gap-4 items-center text-gray-800 text-sm">
                 <span className="block"><strong>Assigned: </strong></span>
                 <div className="flex gap-2">
                     <AssigneeIcon icon={<BsFillPersonFill size={18} />} />
                     <AssigneeIcon icon={<BsFillPersonFill size={18} />} />
                     <AssigneeIcon icon={<BsFillPersonFill size={18} />} />
                 </div>
-            </div>
+            </div> */}
 
             <span className="text-sm"><strong>Priority: </strong>{task["taskPriority"]}</span>
 

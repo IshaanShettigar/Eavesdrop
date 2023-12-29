@@ -9,6 +9,7 @@ import { Employee } from './Employee Components/Employee';
 import Calendar from './Calendar Components/Calendar';
 import Analytics from './Analytics Components/Analytics';
 import KanbanBoard from './Kanban Components/KanbanBoard';
+import { Home } from './Home';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
         path: 'employees',
         element: <Employee />
       },
+      {
+        path: '',
+        element: <Home />
+      }
     ]
   },
 
